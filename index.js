@@ -3,6 +3,8 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const dbconnect = require("./utils/dbconnection");
 const User = require("./routes/user");
+const User_codes = require("./routes/user_code");
+const { authMiddleware } = require("./middleware/auth");
 dotenv.config();
 
 const app = express();
@@ -15,5 +17,6 @@ dbconnect(dburi)
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use("/user", User);
+app.use("/codes", authMiddleware, User_codes);
 
 app.listen(PORT, () => console.log(`server started at port ${PORT}`));
