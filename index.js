@@ -16,6 +16,7 @@ dbconnect(dburi)
 
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use("/user", User);
 app.use("/codes", authMiddleware, User_codes);
 

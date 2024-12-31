@@ -1,7 +1,11 @@
 const mongoose = require("mongoose");
 
 const dbconnect = async (dburi) => {
-  await mongoose.connect(dburi);
+  try {
+    await mongoose.connect(dburi);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 module.exports = dbconnect;
