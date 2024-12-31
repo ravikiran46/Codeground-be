@@ -8,7 +8,6 @@ const CodeSchema = mongoose.Schema(
     },
     title: {
       type: String,
-      unique: true,
     },
     lang: {
       type: Number,

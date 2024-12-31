@@ -7,11 +7,12 @@ const {
   getcode,
   savecode,
   deletecode,
+  updatecode,
 } = require("../controller/user_code");
 
-router.get("/", UserCodes);
+router.get("/all", UserCodes);
 
-router.route("/:id").get(getcode).delete(deletecode);
-router.post("/", savecode);
+router.route("/:id").delete(deletecode);
+router.route("/").get(getcode).post(savecode).put(updatecode);
 
 module.exports = router;
