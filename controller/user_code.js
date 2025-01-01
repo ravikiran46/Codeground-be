@@ -31,6 +31,7 @@ const savecode = async (req, res) => {
   try {
     const titleexist = await Codes.findOne({ title: title });
     if (titleexist) return res.status(409).json({ message: "Use new title" });
+    console.log(titleexist);
     const newcode = new Codes({
       user_Id: req.user.id,
       title,
