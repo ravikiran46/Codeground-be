@@ -1,4 +1,5 @@
 const Codes = require("../model/codes");
+const dbconnect = require("./utils/dbconnection");
 
 const UserCodes = async (req, res) => {
   try {
