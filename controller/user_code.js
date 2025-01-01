@@ -2,6 +2,9 @@ const Codes = require("../model/codes");
 
 const UserCodes = async (req, res) => {
   try {
+    dbconnect(dburi)
+      .then(() => console.log("connected to db"))
+      .catch(() => console.log("cannot connect to db"));
     const savedcodes = await Codes.find({ user_Id: req.user.id });
     if (!savedcodes) res.status(404).json({ message: "No saved codes" });
     res.status(200).json({ codes: savedcodes });
@@ -15,6 +18,9 @@ const UserCodes = async (req, res) => {
 const getcode = async (req, res) => {
   const id = req.query.id;
   try {
+    dbconnect(dburi)
+      .then(() => console.log("connected to db"))
+      .catch(() => console.log("cannot connect to db"));
     const code = await Codes.findOne({ _id: id });
     if (!code) {
       return res.status(404).json({ message: "code doesn't exists" });
@@ -29,9 +35,12 @@ const getcode = async (req, res) => {
 const savecode = async (req, res) => {
   const { title, code, lang } = req.body;
   try {
+    dbconnect(dburi)
+      .then(() => console.log("connected to db"))
+      .catch(() => console.log("cannot connect to db"));
     const titleexist = await Codes.findOne({ title: title });
-    if (titleexist) return res.status(409).json({ message: "Use new title" });
     console.log(titleexist);
+    if (titleexist) return res.status(409).json({ message: "Use new title" });
     const newcode = new Codes({
       user_Id: req.user.id,
       title,
@@ -51,6 +60,9 @@ const updatecode = async (req, res) => {
   const id = req.query.id;
   const { title, code, lang } = req.body;
   try {
+    dbconnect(dburi)
+      .then(() => console.log("connected to db"))
+      .catch(() => console.log("cannot connect to db"));
     const codeexist = await Codes.findById(id);
     if (codeexist) {
       codeexist.title = title || codeexist.title;
